@@ -1,0 +1,39 @@
+[flow]
+name        = "douyin-comment-radar"
+title       = "抖音评论选题雷达"
+description = "输入主题 → 搜视频 → 爬评论区 → 汇总 CSV + 大模型分析报告，反向淘选题"
+icon        = "pulse"
+group       = "情报采集"
+write_ops   = false          # 只读：不发帖不点赞，全程只看
+landing_url = ""             # 起始页在 run 里按关键词拼，这里留空
+
+[[params]]
+key = "topic"
+label = "主题关键词"
+type = "string"
+required = true
+default = ""
+
+[[params]]
+key = "videos"
+label = "抓几个视频"
+type = "int"
+required = false
+default = 8
+
+[[params]]
+key = "per_video"
+label = "每个视频最多抓多少评论"
+type = "int"
+required = false
+default = 40
+
+[[params]]
+key = "provider"
+label = "用哪个大模型（对应 secrets.toml 里 llm.<段名>）"
+type = "string"
+required = false
+default = "deepseek"
+
+[secrets]
+needs = ["llm.deepseek"]

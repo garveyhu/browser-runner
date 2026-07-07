@@ -1,0 +1,29 @@
+[project]
+name = "browser-runner"
+version = "0.1.0"
+description = "Attach 你真实登录的 Chrome，把浏览器操作沉淀成可复放的流程 —— 全栈本地工具"
+requires-python = ">=3.12"
+dependencies = [
+    "browser-runner-engine",
+    "browser-runner-api",
+]
+
+[tool.uv]
+package = false  # 仓库根是虚拟工作区根，不单独打包
+
+[tool.uv.workspace]
+members = ["engine", "backend"]
+
+[tool.uv.sources]
+browser-runner-engine = { workspace = true }
+browser-runner-api = { workspace = true }
+
+[dependency-groups]
+dev = ["ruff>=0.6"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+extend-select = ["I"]

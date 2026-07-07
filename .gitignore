@@ -1,0 +1,31 @@
+# ── 运行时 home 整目录：secrets / profiles / runs / state / 私有 flows 一律不进 git ──
+/var/
+
+# 防手滑：任何位置的真实 secrets / config 都挡（模板是 config/*.example.toml，不受影响）
+**/secrets.toml
+**/config.toml
+.env
+*.local.toml
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+.venv/
+.uv/
+dist/
+build/
+*.egg-info/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# ── 前端 ──
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
+
+# ── 杂 ──
+.DS_Store
+.idea/
+.vscode/

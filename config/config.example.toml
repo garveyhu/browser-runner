@@ -1,0 +1,14 @@
+# 运行配置模板。用法：复制到 <repo>/var/config.toml 按需改（全部可选，不填走内置默认）。
+# 也可用环境变量 BROWSER_RUNNER_<大写键名> 临时覆盖任意一项。
+
+# 调试 Chrome 的端口（默认 9876，避开常见的 9222）
+# debug_port = 9876
+
+# Chrome 可执行文件路径（换机 / 换系统时改）
+# chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+# 调试 Chrome 的专属登录 profile（和日常 Chrome 隔离）
+# profile_dir = "<repo>/var/profiles/default"
+
+# 本机私有流程目录（registry 除扫仓库 flows/ 外也扫这里）
+# private_flows_dir = "<repo>/var/flows"
