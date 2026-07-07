@@ -21,8 +21,11 @@ for a in "$@"; do
 done
 case "${PROFILE_DIR}" in "~/"*) PROFILE_DIR="${HOME}/${PROFILE_DIR#~/}" ;; esac
 
-if [ ! -x "${CHROME}" ]; then echo "找不到 Chrome: ${CHROME}（在 ~/.browser-runner/config.toml 设 chrome_path）"; exit 1; fi
+if [ ! -x "${CHROME}" ]; then echo "找不到 Chrome: ${CHROME}（在 var/config.toml 设 chrome_path）"; exit 1; fi
 mkdir -p "${PROFILE_DIR}"
+
+# 该调试端口上若已有（可能残废的）Chrome，先杀再起 —— 让「起调试 Chrome」= 干净重启
+pkill -f "remote-debugging-port=${PORT}" >/dev/null 2>&1 && sleep 1 || true
 
 echo "==> 专用 profile 启动 · 端口 ${PORT} · profile=${PROFILE_DIR}"
 echo "    首次请在弹出窗口里登录你要自动化的站点（登录持久·只此一次）。"

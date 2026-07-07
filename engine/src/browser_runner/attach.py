@@ -30,11 +30,11 @@ def connect(port: int | None = None):
         browser = pw.chromium.connect_over_cdp(f"http://localhost:{port}", timeout=8000)
     except Exception as e:  # noqa: BLE001
         pw.stop()
-        raise RuntimeError(
-            f"连不上 Chrome 调试端口 {port}：{e}\n"
-            f"→ 先 `bash core/chrome_debug.sh` 用调试端口起 Chrome，"
-            f"再 `curl -s http://localhost:{port}/json/version` 自检。"
-        ) from e
+        hint = "→ 在控制台点「起调试 Chrome」，或跑 chrome_debug.sh 起一个，再自检 curl /json/version。"
+        if "context management is not supported" in str(e):
+            # 连上了但浏览器上下文管理调用失败 —— 多半是调试 Chrome 的 profile 被动过/残废
+            hint = "→ 连上了但上下文已残废（profile 被动过/Chrome 状态坏了）：重启调试 Chrome 即可（控制台「起调试 Chrome」会先杀旧的再起新的）。"
+        raise RuntimeError(f"连 Chrome 调试端口 {port} 出错：{e}\n{hint}") from e
     return pw, browser
 
 
