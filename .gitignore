@@ -32,3 +32,7 @@ frontend/.vite/
 
 # TS 增量构建缓存
 *.tsbuildinfo
+
+# tsc -b 从 vite.config.ts 编译出的产物（会遮蔽 .ts·别入库）
+frontend/vite.config.js
+frontend/vite.config.d.ts
