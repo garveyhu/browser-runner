@@ -28,6 +28,7 @@ export const runApi = {
     return httpGet<RunListResult>(`/runs${s ? `?${s}` : ''}`);
   },
   detail: (runId: string) => httpGet<RunDetail>(`/runs/${runId}`),
+  log: (runId: string) => httpGet<{ run_id: string; log: string }>(`/runs/${runId}/log`),
 };
 
 // ── SSE 消费 ──

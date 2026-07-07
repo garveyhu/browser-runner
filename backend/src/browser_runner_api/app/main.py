@@ -15,7 +15,8 @@ from browser_runner import constants
 from fastapi import APIRouter, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
-from starlette.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.responses import FileResponse, JSONResponse
 
 from browser_runner_api.complex.response.code import ResultCode
 from browser_runner_api.complex.response.exception import CustomException
@@ -56,6 +57,18 @@ def create_app() -> FastAPI:
         return JSONResponse(
             status_code=exc.result_code.code,
             content=Result(success=False, code=exc.result_code.code, message=exc.message).model_dump(),
+        )
+
+    @app.exception_handler(StarletteHTTPException)
+    async def _http_exc(request: Request, exc: StarletteHTTPException):
+        # SPA 深链兜底：非 /api 的 404 → index.html（生产托管前端时前端路由才不 404）
+        if exc.status_code == 404 and not request.url.path.startswith("/api"):
+            index = constants.REPO_ROOT / "frontend" / "dist" / "index.html"
+            if index.is_file():
+                return FileResponse(str(index))
+        return JSONResponse(
+            status_code=exc.status_code,
+            content=Result(success=False, code=exc.status_code, message=exc.detail or "未找到").model_dump(),
         )
 
     @app.exception_handler(Exception)

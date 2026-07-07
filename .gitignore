@@ -29,3 +29,6 @@ frontend/.vite/
 .DS_Store
 .idea/
 .vscode/
+
+# TS 增量构建缓存
+*.tsbuildinfo

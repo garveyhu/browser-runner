@@ -1,13 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { ActiveRunsDock } from '@/components/ActiveRunsDock';
 import ConsolePage from '@/pages/console/ConsolePage';
+import RunDetailPage from '@/pages/runs/RunDetailPage';
+import RunsPage from '@/pages/runs/RunsPage';
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<ConsolePage />} />
-      {/* 运行历史 / 详情 —— P3 换真页 */}
-      <Route path="/runs" element={<div className="p-10 font-mono text-sub">运行历史（P3 建设中）</div>} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<ConsolePage />} />
+        <Route path="/runs" element={<RunsPage />} />
+        <Route path="/runs/:runId" element={<RunDetailPage />} />
+      </Routes>
+      <ActiveRunsDock />
+    </>
   );
 }

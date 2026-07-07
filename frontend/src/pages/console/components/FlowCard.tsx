@@ -5,7 +5,8 @@ import { TILE_BG, tileColor, tileGlyphIsInk } from '@/config/palette';
 import { revealDelay } from '@/config/ui';
 import { useRunsStore } from '@/stores/runsStore';
 import type { Flow } from '@/types/api.types';
-import { collectParams, initValues, ParamForm, type FormValues } from './ParamForm';
+import { collectParams, initValues, ParamForm, valuesFromParams, type FormValues } from './ParamForm';
+import { PresetBar } from './PresetBar';
 import { RunOutput } from './RunOutput';
 
 function Badge({ children, className }: { children: ReactNode; className: string }) {
@@ -67,6 +68,11 @@ export function FlowCard({ flow, index }: { flow: Flow; index: number }) {
 
       {open && (
         <div className="border-t-2 border-line p-5">
+          <PresetBar
+            flow={flow}
+            values={values}
+            onLoad={(params) => setValues(valuesFromParams(flow, params))}
+          />
           <ParamForm
             params={flow.params}
             values={values}

@@ -64,6 +64,18 @@ export function initValues(flow: Flow): FormValues {
   return v;
 }
 
+/** 从一组已保存参数回填表单值（预设加载用）。 */
+export function valuesFromParams(flow: Flow, params: Record<string, unknown>): FormValues {
+  const v = initValues(flow);
+  for (const p of flow.params) {
+    if (p.key in params) {
+      const val = params[p.key];
+      v[p.key] = p.type === 'bool' ? Boolean(val) : val == null ? '' : String(val);
+    }
+  }
+  return v;
+}
+
 /** 收集类型化取值：空的可选项省略（让后端填默认 / 校验必填）。 */
 export function collectParams(flow: Flow, values: FormValues): Record<string, unknown> {
   const out: Record<string, unknown> = {};
