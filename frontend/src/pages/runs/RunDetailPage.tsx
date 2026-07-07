@@ -30,7 +30,11 @@ export default function RunDetailPage() {
         </Link>
 
         {isLoading && <div className="mt-4 font-mono text-sub">加载…</div>}
-        {isError && <div className="mt-4 border-2 border-ink bg-coral p-4 text-white">没有该运行。</div>}
+        {isError && (
+          <div className="mt-4 rounded-2xl border-[2.5px] border-ink bg-coral p-4 font-semibold text-white shadow-pop">
+            没有该运行。
+          </div>
+        )}
 
         {run && (
           <>
@@ -48,7 +52,7 @@ export default function RunDetailPage() {
               {run.params && Object.keys(run.params).length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-2">
                   {Object.entries(run.params).map(([k, v]) => (
-                    <span key={k} className="border-2 border-ink bg-white px-2 py-1 font-mono text-xs">
+                    <span key={k} className="rounded-lg border-2 border-ink bg-white px-2 py-1 font-mono text-xs">
                       <b className="text-sub">{k}</b>={String(v)}
                     </span>
                   ))}
@@ -57,7 +61,7 @@ export default function RunDetailPage() {
             </header>
 
             {run.result && (
-              <div className="mt-5 border-2 border-ink bg-panel">
+              <div className="mt-5 overflow-hidden rounded-2xl border-[2.5px] border-ink bg-white shadow-pop-sm">
                 <div className="px-4 py-2 font-mono text-xs font-bold uppercase text-sub">结果</div>
                 <ResultPanel result={run.result} runId={run.run_id} />
               </div>
@@ -72,8 +76,8 @@ export default function RunDetailPage() {
                       key={a.name}
                       type="button"
                       onClick={() => setSelected(a.name)}
-                      className={`border-2 border-ink px-3 py-1.5 font-mono text-xs transition-transform ease-back hover:-translate-x-px hover:-translate-y-px ${
-                        selected === a.name ? 'bg-ink text-paper' : 'bg-panel'
+                      className={`rounded-lg border-[2.5px] border-ink px-3 py-1.5 font-mono text-xs transition-transform ease-back hover:-translate-x-px hover:-translate-y-px ${
+                        selected === a.name ? 'bg-ink text-white' : 'bg-white'
                       }`}
                     >
                       {a.name}

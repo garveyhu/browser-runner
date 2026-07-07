@@ -32,7 +32,7 @@ export function PresetBar({ flow, values, onLoad }: PresetBarProps) {
     <div className="mb-4 flex flex-wrap items-center gap-2">
       <span className="font-mono text-[10px] uppercase tracking-wider text-sub">预设</span>
       {(presets ?? []).map((p) => (
-        <span key={p.id} className="inline-flex items-center gap-1.5 border-2 border-ink bg-white px-2 py-1 text-xs">
+        <span key={p.id} className="inline-flex items-center gap-1.5 rounded-lg border-2 border-ink bg-white px-2 py-1 text-xs">
           <button type="button" onClick={() => onLoad(p.params)} className="hover:text-blue">
             {p.name}
           </button>
@@ -49,7 +49,7 @@ export function PresetBar({ flow, values, onLoad }: PresetBarProps) {
       <button
         type="button"
         onClick={save}
-        className="border-2 border-dashed border-ink px-2 py-1 text-xs text-sub transition-colors hover:bg-lime hover:text-ink"
+        className="rounded-lg border-2 border-dashed border-ink px-2 py-1 text-xs text-sub transition-colors hover:bg-lime hover:text-ink"
       >
         + 存为预设
       </button>

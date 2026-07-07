@@ -17,10 +17,12 @@ export function ParamForm({ params, values, onChange }: ParamFormProps) {
     <div className="flex flex-col gap-4">
       {params.map((p) => (
         <label key={p.key} className="flex flex-col gap-1.5">
-          <span className="flex items-center gap-2 text-sm font-medium">
+          <span className="flex items-center gap-2 text-sm font-semibold">
             {p.label}
             {p.required && (
-              <span className="border border-coral px-1 py-px font-mono text-[10px] text-coral">必填</span>
+              <span className="rounded border-2 border-ink bg-coral px-1.5 py-px font-mono text-[10px] font-bold text-white">
+                必填
+              </span>
             )}
           </span>
           {p.type === 'bool' ? (
@@ -38,7 +40,7 @@ export function ParamForm({ params, values, onChange }: ParamFormProps) {
               required={p.required}
               placeholder={placeholderFor(p)}
               onChange={(e) => onChange(p.key, e.target.value)}
-              className="border-2 border-ink bg-paper px-3 py-2 text-sm outline-none focus:shadow-pop-sm"
+              className="rounded-xl border-[2.5px] border-ink bg-white px-3.5 py-2.5 text-sm font-medium outline-none transition-shadow focus:shadow-pop-sm"
             />
           )}
         </label>

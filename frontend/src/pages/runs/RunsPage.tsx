@@ -22,7 +22,7 @@ export default function RunsPage() {
           <select
             value={flow}
             onChange={(e) => setFlow(e.target.value)}
-            className="border-2 border-ink bg-panel px-3 py-1.5 font-mono text-xs outline-none"
+            className="rounded-lg border-[2.5px] border-ink bg-white px-3 py-1.5 font-mono text-xs outline-none"
           >
             <option value="">全部流程</option>
             {(flows ?? []).map((f) => (
@@ -35,7 +35,7 @@ export default function RunsPage() {
 
         {isLoading && <div className="font-mono text-sub">加载…</div>}
         {data && data.runs.length === 0 && (
-          <div className="border-2 border-dashed border-ink bg-panel p-10 text-center text-sub">
+          <div className="rounded-2xl border-[2.5px] border-dashed border-ink bg-white p-10 text-center text-sub">
             还没有运行记录。去控制台跑一个。
           </div>
         )}
@@ -45,7 +45,7 @@ export default function RunsPage() {
             <Link
               key={r.run_id}
               to={`/runs/${r.run_id}`}
-              className="flex items-center gap-4 border-2 border-ink bg-panel px-4 py-3 shadow-pop-sm transition-transform ease-back hover:-translate-x-0.5 hover:-translate-y-0.5"
+              className="flex items-center gap-4 rounded-xl border-[2.5px] border-ink bg-white px-4 py-3 shadow-pop-sm transition-transform ease-back hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-pop"
             >
               <StatusBadge status={r.status} />
               <span className="font-bold">{r.flow}</span>

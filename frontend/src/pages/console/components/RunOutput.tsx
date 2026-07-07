@@ -17,8 +17,8 @@ export function RunOutput({ run }: { run: ActiveRun }) {
     run.status === 'running' && run.dryRun ? '运行中 · dry-run' : undefined;
 
   return (
-    <section className="mt-5 border-2 border-ink">
-      <div className="flex items-center justify-between border-b-2 border-ink bg-paper px-3 py-2">
+    <section className="mt-6 overflow-hidden rounded-xl border-[2.5px] border-ink shadow-pop-sm">
+      <div className="flex items-center justify-between border-b-[2.5px] border-ink bg-paper px-3 py-2">
         <span className="font-mono text-xs font-bold uppercase tracking-wider">运行输出</span>
         <div className="flex items-center gap-2">
           <StatusBadge status={run.status} label={badgeLabel} />

@@ -72,13 +72,13 @@ function PathRow({ label, value }: { label: string; value: string }) {
     });
   }
   return (
-    <div className="border-2 border-ink bg-panel px-3 py-2">
+    <div className="rounded-xl border-2 border-ink bg-paper px-3 py-2">
       <div className="flex items-center justify-between gap-3 font-mono text-[10px] font-bold uppercase tracking-wider text-sub">
         <span>{label}</span>
         <button
           type="button"
           onClick={copy}
-          className="shrink-0 border border-ink bg-white px-2 py-0.5 text-[10px] transition-transform ease-back hover:-translate-x-px hover:-translate-y-px hover:bg-lime"
+          className="shrink-0 rounded-md border-2 border-ink bg-white px-2 py-0.5 text-[10px] transition-transform ease-back hover:-translate-x-px hover:-translate-y-px hover:bg-lime"
         >
           {copied ? '已复制' : '复制'}
         </button>

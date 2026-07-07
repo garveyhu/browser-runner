@@ -7,19 +7,35 @@ body,
 #root {
   height: 100%;
 }
+
+/* 纸底 + 细点阵（破「纯色平底」）*/
 body {
   @apply bg-paper text-ink font-sans antialiased;
+  background-image: radial-gradient(#141414 0.5px, transparent 0.6px);
+  background-size: 22px 22px;
+  background-position: -8px -8px;
+  overflow-x: hidden;
 }
 
-/* 错峰弹入：元素加 class `reveal` + 内联 style --i 决定延迟 */
 @layer utilities {
+  /* 海报巨字：蓝填充 + 黑描边（破框咬合的主视觉）*/
+  .wordmark-stroke {
+    -webkit-text-stroke: 3px #141414;
+    paint-order: stroke fill;
+  }
+  /* 错峰弹入：元素加 class `reveal` + 内联 style --i 决定延迟 */
   .reveal {
     animation: reveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     animation-delay: calc(var(--i, 0) * 70ms);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .animate-floaty,
+  .animate-wobble,
+  .animate-bpulse,
+  .animate-spinslow {
     animation: none !important;
     opacity: 1 !important;
   }
