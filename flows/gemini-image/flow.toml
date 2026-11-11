@@ -1,0 +1,58 @@
+# Gemini 网页出图 —— 用你已登录的会员号，在网页 UI 通道出图。
+#
+# 为什么值得单独有一条流程：同一个 Gemini 会员号有两条通道，网页 UI 与逆向 web API，
+# 后者有 Google 独立的反自动化限流。UI 通道信任分高、基本不吃那条限流——手动画得出来，
+# 这条流程就画得出来。
+
+[flow]
+name        = "gemini-image"
+title       = "Gemini 网页出图"
+description = "在已登录的 Gemini 里发一句提示词，出图后把图落到指定路径（原字节优先）"
+icon        = "camera"
+group       = "素材生成"
+# 只在自己的对话里发提示词、不发布不删改不付款，所以不算写操作。
+write_ops   = false
+# 起始页要按账号位拼（/u/N/app），在 run 里 goto。
+landing_url = ""
+
+[[params]]
+key = "prompt"
+label = "提示词"
+type = "string"
+required = true
+default = ""
+
+[[params]]
+key = "out"
+label = "出图落到哪（绝对路径）"
+type = "string"
+required = true
+default = ""
+
+[[params]]
+key = "aspect"
+label = "画幅提示（16:9 / 9:16 / 1:1…）"
+type = "string"
+required = false
+default = ""
+
+[[params]]
+key = "ref"
+label = "参考图（锁角色 / 锁画风）"
+type = "string"
+required = false
+default = ""
+
+[[params]]
+key = "user_index"
+label = "第几个已登录账号（/u/N/）"
+type = "int"
+required = false
+default = 0
+
+[[params]]
+key = "timeout_s"
+label = "最多等多少秒出图"
+type = "int"
+required = false
+default = 300
